@@ -1,0 +1,643 @@
+#!/bin/bash
+
+set -e
+
+v="1.0.0.0 RC1"
+
+function usage {
+	cat << USAGE
+
+Auto IPA Builder v$v
+
+Usage: build 'option'
+
+Help: 
+      build 'ipalist' - Shows the list of required IPAs and their names
+      build 'optionslist' - Shows the list of options for the build command
+
+USAGE
+	exit 1
+}
+
+[[ $# = 0 ]] && usage
+
+commands=(ipalist optionslist audiomackpp cercube4 cercube4pp comicboxpp cotomoviespp facebookpp himusicpp igrocket instagrampp jodelpp magiccleanerpp mediaboxhdpp plexpp secureonionpp sleepcyclepp snapchatpp speedtestpp spotifypp tiktokpp twitchpp twitterpp wawatusi weatherlivepp whatsapppp youtubepp)
+[[ ! " ${commands[@]} " =~ " $1 " ]] && usage
+
+function ipalist {
+	echo "IPAs must be in a folder called Tweaks on your Desktop"
+	echo "IPAs:
+      Audiomack.ipa
+      ComicBox.ipa
+      CotoMovies.ipa
+      Facebook.ipa
+      hiMusic.ipa
+      Instagram.ipa
+      Jodel.ipa
+      MagicCleaner.ipa
+      MediaBoxHD.ipa
+      Plex.ipa
+      SecureOnion.ipa
+      SleepCycle.ipa
+      Snapchat.ipa
+      Speedtest.ipa
+      Spotify.ipa
+      TikTok.ipa
+      Twitch.ipa
+      Twitter.ipa
+      WeatherLive.ipa
+      WhatsApp.ipa
+      YouTube.ipa"
+}
+
+function optionslist {
+	echo "Options:
+      audiomackpp - Builds Audiomack++
+      cercube4 - Builds Cercube 4
+      cercube4pp - Builds Cercube 4++
+      comicboxpp - Builds Comic Box++
+      cotomoviespp - Builds CotoMovies++
+      facebookpp - Builds Facebook++
+      himusicpp - Builds hiMusic++
+      igrocket - Builds Instagram Rocket
+      instagrampp - Builds Instagram++
+      jodelpp - Builds Jodel++
+      magiccleanerpp - Builds Magic Cleaner++
+      mediaboxhdpp -  Builds MediaBox HD++
+      plexpp - Builds Plex++
+      secureonionpp - Builds Secure Onion++
+      sleepcyclepp - Builds Sleep Cycle++
+      snapchatpp - Builds Snapchat++
+      speedtestpp - Builds Speedtest++
+      spotifypp - Builds Spotify++
+      tiktokpp - Builds TikTok++
+      twitchpp - Builds Twitch++
+      twitterpp - Builds Twitter++
+      wawatusi - Builds WhatsApp Watusi
+      weatherlivepp - Builds Weather Live++
+      whatsapppp - Builds WhatsApp++
+      youtubepp - Builds YouTube++"
+}
+
+function audiomackpp {
+	echo "Building Audiomack++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Audiomack.ipa -d Audiomack > /dev/null
+	cd "Audiomack/Payload/audiomack-iphone.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/audiomackpp.zip"
+	echo "Extracting Tweak"
+	unzip audiomackpp.zip > /dev/null
+	rm -r -f audiomackpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/AudiomackCrack.dylib" -t "audiomack-iphone" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Audiomack++.ipa" * > /dev/null
+	cd ../; rm -r -f Audiomack
+	echo "Done Audiomack++"
+}
+
+function cercube4 {
+	echo "Building Cercube 4"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../YouTube.ipa -d YouTube > /dev/null
+	cd "YouTube/Payload/YouTube.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/cercube4.zip"
+	echo "Extracting Tweak"
+	unzip cercube4.zip > /dev/null
+	rm -r -f cercube4.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/Cercube.dylib" -t "YouTube" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Cercube 4 For YouTube.ipa" * > /dev/null
+	cd ../; rm -r -f YouTube
+	echo "Done Cercube 4"
+}
+
+function cercube4pp {
+	echo "Building Cercube 4++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../YouTube.ipa -d YouTube > /dev/null
+	cd "YouTube/Payload/YouTube.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/cercube4.zip"
+	curl -O "https://files.hollr2099.net/tweaks/cercube4pp.zip"
+	echo "Extracting Tweak"
+	unzip cercube4.zip > /dev/null
+	unzip cercube4pp.zip > /dev/null
+	rm -r -f cercube4.zip
+	rm -r -f cercube4pp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/Cercube.dylib" -t "YouTube" > /dev/null
+	optool install -c load -p "@executable_path/CercubeCrack.dylib" -t "YouTube" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Cercube 4 For YouTube++.ipa" * > /dev/null
+	cd ../; rm -r -f YouTube
+	echo "Done Cercube 4++"
+}
+
+function comicboxpp {
+	echo "Building Comic Box++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../ComicBox.ipa -d ComicBox > /dev/null
+	cd "ComicBox/Payload/Comic Box.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/comicboxpp.zip"
+	echo "Extracting Tweak"
+	unzip comicboxpp.zip > /dev/null
+	rm -r -f comicboxpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/ComicBoxCrack.dylib" -t "Comic Box" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Comic Box++.ipa" * > /dev/null
+	cd ../; rm -r -f ComicBox
+	echo "Done Comic Box++"
+}
+
+function cotomoviespp {
+	echo "Building CotoMovies++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../CotoMovies.ipa -d CotoMovies > /dev/null
+	cd "CotoMovies/Payload/CotoMovies.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/cotomoviespp.zip"
+	echo "Extracting Tweak"
+	unzip cotomoviespp.zip > /dev/null
+	rm -r -f cotomoviespp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/CotoMoviesCrack.dylib" -t "CotoMovies" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"CotoMovies++.ipa" * > /dev/null
+	cd ../; rm -r -f CotoMovies
+	echo "Done CotoMovies++"
+}
+
+function facebookpp {
+	echo "Building Facebook++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Facebook.ipa -d Facebook > /dev/null
+	cd "Facebook/Payload/Facebook.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/fbppsl.zip"
+	echo "Extracting Tweak"
+	unzip fbppsl.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f fbppsl.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "Facebook" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Facebook++.ipa" * > /dev/null
+	cd ../; rm -r -f Facebook
+	echo "Done Facebook++"
+}
+
+function himusicpp {
+	echo "Building hiMusic++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../hiMusic.ipa -d hiMusic > /dev/null
+	cd "hiMusic/Payload/hiMusic.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/himusicpp.zip"
+	echo "Extracting Tweak"
+	unzip himusicpp.zip > /dev/null
+	rm -r -f himusicpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/hiMusicCrack.dylib" -t "hiMusic" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"hiMusic++.ipa" * > /dev/null
+	cd ../; rm -r -f hiMusic
+	echo "Done hiMusic++"
+}
+
+function igrocket {
+	echo "Building Instagram Rocket"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Instagram.ipa -d Instagram > /dev/null
+	cd "Instagram/Payload/Instagram.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/igrocket.zip"
+	echo "Extracting Tweak"
+	unzip igrocket.zip > /dev/null
+	rm -r -f igrocket.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/Rocket.dylib" -t "Instagram" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Instagram Rocket.ipa" * > /dev/null
+	cd ../; rm -r -f Instagram
+	echo "Done Instagram Rocket"
+}
+
+function instagrampp {
+	echo "Building Instagram++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Instagram.ipa -d Instagram > /dev/null
+	cd "Instagram/Payload/Instagram.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/igppsl.zip"
+	echo "Extracting Tweak"
+	unzip igppsl.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f igppsl.zip PlugIns/InstagramWatchKitExtension.appex
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "Instagram" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Instagram++.ipa" * > /dev/null
+	cd ../; rm -r -f Instagram
+	echo "Done Instagram++"
+}
+
+function jodelpp {
+	echo "Building Jodel++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Jodel.ipa -d Jodel > /dev/null
+	cd "Jodel/Payload/Jodel.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/jodelpp.zip"
+	echo "Extracting Tweak"
+	unzip jodelpp.zip > /dev/null
+	rm -r -f jodelpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/JodelPlus.dylib" -t "Jodel" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Jodel++.ipa" * > /dev/null
+	cd ../; rm -r -f Jodel
+	echo "Done Jodel++"
+}
+
+function magiccleanerpp {
+	echo "Building Magic Cleaner++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../MagicCleaner.ipa -d MagicCleaner > /dev/null
+	cd "MagicCleaner/Payload/FreePhoneCleaner.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/magiccleanerpp.zip"
+	echo "Extracting Tweak"
+	unzip magiccleanerpp.zip > /dev/null
+	rm -r -f magiccleanerpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MagicCleanerCrack.dylib" -t "FreePhoneCleaner" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Magic Cleaner++.ipa" * > /dev/null
+	cd ../; rm -r -f MagicCleaner
+	echo "Done Magic Cleaner++"
+}
+
+function mediaboxhdpp {
+	echo "Building MediaBox HD++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../MediaBoxHD.ipa -d MediaBoxHD > /dev/null
+	cd "MediaBoxHD/Payload/MediaBox HD.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/mediaboxhdpp.zip"
+	echo "Extracting Tweak"
+	unzip mediaboxhdpp.zip > /dev/null
+	rm -r -f mediaboxhdpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MediaBoxHDCrack.dylib" -t "MediaBox HD" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"MediaBox HD++.ipa" * > /dev/null
+	cd ../; rm -r -f MediaBoxHD
+	echo "Done MediaBox HD++"
+}
+
+function plexpp {
+	echo "Building Plex++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Plex.ipa -d Plex > /dev/null
+	cd "Plex/Payload/PlexMobile.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/plexpp.zip"
+	echo "Extracting Tweak"
+	unzip plexpp.zip > /dev/null
+	rm -r -f plexpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/PlexCrack.dylib" -t "PlexMobile" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Plex++.ipa" * > /dev/null
+	cd ../; rm -r -f Plex
+	echo "Done Plex++"
+}
+
+function secureonionpp {
+	echo "Building Secure Onion++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../SecureOnion.ipa -d SecureOnion > /dev/null
+	cd "SecureOnion/Payload/TorIA2016_01_13.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/secureonionpp.zip"
+	echo "Extracting Tweak"
+	unzip secureonionpp.zip > /dev/null
+	rm -r -f secureonionpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/SecureOnionCrack.dylib" -t "TorIA2016_01_13" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Secure Onion++.ipa" * > /dev/null
+	cd ../; rm -r -f SecureOnion
+	echo "Done Secure Onion++"
+}
+
+function sleepcyclepp {
+	echo "Building Sleep Cycle++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../SleepCycle.ipa -d SleepCycle > /dev/null
+	cd "SleepCycle/Payload/GoodMorning.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/sleepcyclepp.zip"
+	echo "Extracting Tweak"
+	unzip sleepcyclepp.zip > /dev/null
+	rm -r -f sleepcyclepp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/SleepCycleCrack.dylib" -t "GoodMorning" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Sleep Cycle++.ipa" * > /dev/null
+	cd ../; rm -r -f SleepCycle
+	echo "Done Sleep Cycle++"
+}
+
+function snapchatpp {
+	echo "Building Snapchat++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Snapchat.ipa -d Snapchat > /dev/null
+	cd "Snapchat/Payload/Snapchat.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/SnapPlusSL.zip"
+	echo "Extracting Tweak"
+	unzip SnapPlusSL.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f SnapPlusSL.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "Snapchat" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Snapchat++.ipa" * > /dev/null
+	cd ../; rm -r -f Snapchat
+	echo "Done Snapchat++"
+}
+
+function speedtestpp {
+	echo "Building Speedtest++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Speedtest.ipa -d Speedtest > /dev/null
+	cd "Speedtest/Payload/Speedtest.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/speedtestpp.zip"
+	echo "Extracting Tweak"
+	unzip speedtestpp.zip > /dev/null
+	rm -r -f speedtestpp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/SpeedtestCrack.dylib" -t "SpeedTest" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Speedtest++.ipa" * > /dev/null
+	cd ../; rm -r -f Speedtest
+	echo "Done Speedtest++"
+}
+
+function spotifypp {
+	echo "Building Spotify++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Spotify.ipa -d Spotify > /dev/null
+	cd "Spotify/Payload/Spotify.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/spotifypp.zip"
+	echo "Extracting Tweak"
+	unzip spotifypp.zip > /dev/null
+	rm -r -f spotifypp.zip
+	echo "Injecting Tweak"
+	install_name_tool -change /usr/lib/libSystem.B.dylib @executable_path/Sys.dylib "Spotify" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Spotify++.ipa" * > /dev/null
+	cd ../; rm -r -f Spotify
+	echo "Done Spotify++"
+}
+
+function tiktokpp {
+	echo "Building TikTok++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../TikTok.ipa -d TikTok > /dev/null
+	cd "TikTok/Payload/TikTok.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/mlppsl.zip"
+	echo "Extracting Tweak"
+	unzip mlppsl.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f mlppsl.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "TikTok" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"TikTok++.ipa" * > /dev/null
+	cd ../; rm -r -f TikTok
+	echo "Done TikTok++"
+}
+
+function twitchpp {
+	echo "Building Twitch++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Twitch.ipa -d Twitch > /dev/null
+	cd "Twitch/Payload/Twitch.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/twitchpp.zip"
+	echo "Extracting Tweak"
+	unzip twitchpp.zip > /dev/null
+	rm -r -f twitchpp.zip
+	echo "Injecting Tweak"
+	install_name_tool -change /usr/lib/libSystem.B.dylib @executable_path/Sys.dylib "Twitch" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Twitch++.ipa" * > /dev/null
+	cd ../; rm -r -f Twitch
+	echo "Done Twitch++"
+}
+
+function twitterpp {
+	echo "Building Twitter++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../Twitter.ipa -d Twitter > /dev/null
+	cd "Twitter/Payload/Twitter.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/twppsl.zip"
+	echo "Extracting Tweak"
+	unzip twppsl.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f twppsl.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "Twitter" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Twitter++.ipa" * > /dev/null
+	cd ../; rm -r -f Twitter
+	echo "Done Twitter++"
+}
+
+function wawatusi {
+	echo "Building WhatsApp Watusi"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../WhatsApp.ipa -d WhatsApp > /dev/null
+	cd "WhatsApp/Payload/WhatsApp.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/wawatusi.zip"
+	echo "Extracting Tweak"
+	unzip wawatusi.zip > /dev/null
+	rm -r -f wawatusi.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/Watusi.dylib" -t "WhatsApp" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"WhatsApp Watusi.ipa" * > /dev/null
+	cd ../; rm -r -f WhatsApp
+	echo "Done WhatsApp Watusi"
+}
+
+function weatherlivepp {
+	echo "Building Weather Live++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../WeatherLive.ipa -d WeatherLive > /dev/null
+	cd "WeatherLive/Payload/Weather Live Free.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/weatherlivepp.zip"
+	echo "Extracting Tweak"
+	unzip weatherlivepp.zip > /dev/null
+	rm -r -f weatherlivepp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/WeatherLiveCrack.dylib" -t "Weather Live Free" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"Weather Live++.ipa" * > /dev/null
+	cd ../; rm -r -f WeatherLive
+	echo "Done Weather Live++"
+}
+
+function whatsapppp {
+	echo "Building WhatsApp++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../WhatsApp.ipa -d WhatsApp > /dev/null
+	cd "WhatsApp/Payload/WhatsApp.app";
+	echo "Downloading Tweak"
+	curl -O "https://raw.githubusercontent.com/eni9889/pptweaks/master/wappsl.zip"
+	echo "Extracting Tweak"
+	unzip wappsl.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f wappsl.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "WhatsApp" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"WhatsApp++.ipa" * > /dev/null
+	cd ../; rm -r -f WhatsApp
+	echo "Done WhatsApp++"
+}
+
+function youtubepp {
+	echo "Building YouTube++"
+	cd ~/Desktop/Tweaks
+	mkdir -p Build
+	cd Build
+	echo "Extracting IPA"
+	unzip ../YouTube.ipa -d YouTube > /dev/null
+	cd "YouTube/Payload/YouTube.app";
+	echo "Downloading Tweak"
+	curl -O "https://files.hollr2099.net/tweaks/youtubepp.zip"
+	echo "Extracting Tweak"
+	unzip youtubepp.zip > /dev/null
+	mv pptweak.dylib MobileSubstrate.dylib
+	rm -r -f youtubepp.zip
+	echo "Injecting Tweak"
+	optool install -c load -p "@executable_path/MobileSubstrate.dylib" -t "YouTube" > /dev/null
+	echo "Packaging IPA"
+	cd ../../
+	zip -r -X ../"YouTube++.ipa" * > /dev/null
+	cd ../; rm -r -f YouTube
+	echo "Done YouTube++"
+}
+
+"$1" "${@:2}"
