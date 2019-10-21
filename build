@@ -2,7 +2,7 @@
 
 set -e
 
-v="1.0.0.0 RC1"
+v="1.0.0.0 RC"
 
 function usage {
 	cat << USAGE
@@ -25,7 +25,7 @@ commands=(ipalist optionslist audiomackpp cercube4 cercube4pp comicboxpp cotomov
 [[ ! " ${commands[@]} " =~ " $1 " ]] && usage
 
 function ipalist {
-	echo "IPAs must be in a folder called Tweaks on your Desktop"
+	echo "IPAs must be in a folder called Ipas on your Desktop"
 	echo "IPAs:
       Audiomack.ipa
       ComicBox.ipa
@@ -81,14 +81,14 @@ function optionslist {
 
 function audiomackpp {
 	echo "Building Audiomack++"
-	cd ~/Desktop/Tweaks
+	cd ~/Desktop/Ipas
 	mkdir -p Build
 	cd Build
 	echo "Extracting IPA"
 	unzip ../Audiomack.ipa -d Audiomack > /dev/null
 	cd "Audiomack/Payload/audiomack-iphone.app";
 	echo "Downloading Tweak"
-	curl -O "https://files.hollr2099.net/tweaks/audiomackpp.zip"
+	curl -O "https://raw.githubusercontent.com/SarahH12099/Auto-IPA-Builder/master/Tweaks/audiomackpp.zip"
 	echo "Extracting Tweak"
 	unzip audiomackpp.zip > /dev/null
 	rm -r -f audiomackpp.zip
